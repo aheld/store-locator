@@ -1,41 +1,41 @@
+# flyctl launch added from .gitignore
 # Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+**/*.exe
+**/*.exe~
+**/*.dll
+**/*.so
+**/*.dylib
 
 # Test dir and binary, built with `go test -c`
-tests/
-*.test
+**/tests
+**/*.test
 
 # Output of the go coverage tool.
-*.out
+**/*.out
 
 # Go workspace file.
-go.work
+**/go.work
 
 # Apple macOS system files.
-.DS_Store
+**/.DS_Store
 
 # Project environment config files.
-.env
+**/.env
 
 # IDE config directories.
-.idea/
-.vscode/
+**/.idea
+**/.vscode
 
 # Dependency directories.
-node_modules/
-vendor/
+**/node_modules
+**/vendor
 
 # Binary directories.
-bin/
+**/bin
 
 # Temp and local cache directories.
-dist/
-tmp/
-.parcel-cache/
-tmp
-
-.env
+**/dist
+**/tmp
+**/.parcel-cache
+**/tmp
+fly.toml

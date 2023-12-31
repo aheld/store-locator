@@ -1,0 +1,17 @@
+package templates
+
+templ MarketHero(market Market) {
+  <h2>Market Hero</h2>
+  <div class="hero bg-base-200">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <img src={market.Image} class="max-w-sm rounded-lg shadow-2xl" width="400px" height="300px" />
+    <div>
+      <h1 class="text-5xl font-bold">{ market.Name }</h1>
+      <p class="py-6">{market.Description}</p>
+      <a role="button" class="btn btn-primary" href={ templ.URL(market.BingUrl()) }>Directions</a>
+    </div>
+  </div>
+  </div>
+}
+
+
