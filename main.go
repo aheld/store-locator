@@ -29,6 +29,7 @@ func main() {
 			Latitude:    market.Latitude,
 			Longitude:   market.Longitude,
 			Image:       fmt.Sprint("https://www.usdalocalfoodportal.com/mywp/uploadimages/", market.Image),
+			Products:    market.Products,
 		}
 		m.Slug = m.GetSlug()
 		markets.Markets = append(markets.Markets, m)
@@ -83,4 +84,13 @@ func main() {
 	e.Logger.Fatal(e.Start(host + ":8000"))
 
 	fmt.Println("Listening on :8000")
+}
+
+// a function that returns the routes for kubernets health checks
+func healthCheckRoutes() *echo.Echo {
+	e := echo.New()
+	e.GET("/health", func(c echo.Context) error {
+		return c.String(http.StatusOK, "OK")
+	})
+	return e
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"strings"
 )
 
 type Market struct {
@@ -14,6 +15,7 @@ type Market struct {
 	Latitude    string `json:"location_x"`
 	Longitude   string `json:"location_y"`
 	Image       string `json:"listing_image"`
+	Products    []string
 }
 
 //go:embed data/farmers_markets_pa.json
@@ -27,5 +29,20 @@ func Import() ([]Market, error) {
 
 	var markets []Market
 	err = json.Unmarshal(jsonFile, &markets)
+	for i := range markets {
+		markets[i].Description, markets[i].Products = splitDescription(markets[i].Description)
+	}
 	return markets, err
+}
+
+func splitDescription(desc string) (string, []string) {
+	description := desc
+	var products []string = []string{}
+	if strings.Contains(desc, "Products:") {
+
+		tmp := strings.Split(desc, "Products: ")
+		description = tmp[0]
+		products = strings.Split(tmp[1], ";")
+	}
+	return description, products
 }

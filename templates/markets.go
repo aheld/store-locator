@@ -13,6 +13,7 @@ type Market struct {
 	Website     string
 	Latitude    string
 	Longitude   string
+	Products    []string
 	Image       string
 }
 

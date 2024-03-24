@@ -7,7 +7,7 @@ dev:
 	--reload-delay 1500
 
 godev:
-	air -c ./.air.toml	
+	air -c ./.air.toml
 
 run:
 	go run *.go
@@ -26,3 +26,11 @@ container-run: container-build
 
 deploy:
 	flyctl deploy
+
+bootstrap:
+	go install github.com/a-h/templ/cmd/templ@latest
+	go install github.com/cosmtrek/air@latest
+	npm install -g browser-sync
+
+	npm install -D tailwindcss
+	npx tailwindcss init

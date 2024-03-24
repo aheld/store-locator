@@ -31,7 +31,7 @@ templ Layout(settings Settings, hero templ.Component) {
   <script src="/assets/htmx_1.9.10.js"></script>
   <script>
     htmx.logger = function(elt, event, data) {
-        if (false && console) {
+        if (true && console) {
             console.log(event, elt, data);
         }
     }
@@ -53,18 +53,19 @@ templ Layout(settings Settings, hero templ.Component) {
     <!-- fixed-width -->
     <div class="w-fixed w-full flex-shrink flex-grow-0 px-4">
     <div class="collapse bg-base-200"> 
-      <input type="checkbox" id="showMarketList" />
+    <input type="checkbox" id="showMarketList" hx-on:focus="console.log('here');htmx.find('#search').focus()"/>
       <div class="collapse-title text-xl font-medium">
-         More PA Markets....
+          More PA Markets....
+        <input class="input input-bordered max-w-xs" type="search" 
+        id="search" 
+        name="q" placeholder="Begin Typing To Search.." 
+        hx-post="/markets/search" 
+        hx-trigger="input changed delay:500ms" 
+        hx-target="#marketList" 
+        hx-indicator=".htmx-indicator"
+        ></input>
       </div>
       <div class="collapse-content"> 
-        <input class="input input-bordered max-w-xs" type="search" 
-          name="q" placeholder="Begin Typing To Search.." 
-          hx-post="/markets/search" 
-          hx-trigger="input changed delay:500ms, q" 
-          hx-target="#marketList" 
-          hx-indicator=".htmx-indicator"
-          ></input>
         @MarketList(settings.Markets)
       </div>
     </div>
@@ -95,6 +96,9 @@ templ MarketList(markets Markets) {
           })
         </script>
         <div class="flex flex-col space-y-4" id="marketList">
+          if len(markets.Markets) == 0 {
+            <h3>No markets found</h3>
+          }
           for _, marketName := range markets.Markets {
             @market(marketName)
           }

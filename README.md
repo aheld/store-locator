@@ -11,3 +11,6 @@ npm install -g browser-sync
 
 npm install -D tailwindcss
 npx tailwindcss init
+
+brew install flyctl
+
