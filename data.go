@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"fmt"
 	"strings"
 )
 
@@ -44,5 +45,7 @@ func splitDescription(desc string) (string, []string) {
 		description = tmp[0]
 		products = strings.Split(tmp[1], ";")
 	}
+	fmt.Println(description)
+	description = strings.Replace(description, "<br>Available", "", 1)
 	return description, products
 }
