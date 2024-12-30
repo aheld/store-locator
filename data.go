@@ -23,7 +23,7 @@ type Market struct {
 var f embed.FS
 
 func Import() ([]Market, error) {
-	jsonFile, err := f.ReadFile("data/farmers_markets_pa.json")
+	jsonFile, err := f.ReadFile(name string)("data/farmers_markets_pa.json")
 	if err != nil {
 		return nil, err
 	}
